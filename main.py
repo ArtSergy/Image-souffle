@@ -33,8 +33,8 @@ resy = data.shape[1]
 pixc = resx*resy
 startshape = data.shape
 starttype = data.dtype
-framerate = 40      #FPS'y
-duration = 1        #dlugosc w sekundach
+framescout = 40         #number of frames
+duration = 1            #duration
 outputindex = 0
 
 #data = np.insert(data,data.shape[2],255,axis=2)
@@ -54,7 +54,7 @@ for j in range(pixc):
     data[0][randindex][1] = tempg
     data[0][randindex][2] = tempb
 
-    if (j%(pixc//framerate//duration)==0):
+    if (j%(pixc//framescout//duration)==0):
         savetooutput(data)
         outputindex += 1
 
@@ -68,6 +68,6 @@ for i in imgs:
 frames[0].save('/home/linux77/PycharmProjects/imagesort/output/output.gif', format='GIF',
                append_images=frames[1:],
                save_all=True,
-               duration=framerate//duration//2, loop=0)
+               duration=framescout//duration//2, loop=0)
 
 outputgif = Image.open("/home/linux77/PycharmProjects/imagesort/output/output.gif").show()
