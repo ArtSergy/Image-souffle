@@ -6,6 +6,6 @@ Simple python script to randomize pixels position in any image. For now only .jp
 
 you can override the following values to alter the gif's properties:
 ```python
-FPS = 30                #Frames per second
-duration = 2            #Duration in seconds
+71 | FPS = 30                #Frames per second
+72 | duration = 2            #Duration in seconds
 ```
