@@ -1,4 +1,4 @@
-# <img src="https://i.imgur.com/js2tatp.png" alt="drawing" width="55"/> Image-Sufflé
+# <img src="https://i.imgur.com/js2tatp.png" alt="drawing" width="75"/> Image-Sufflé
 
 
 
