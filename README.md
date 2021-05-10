@@ -10,5 +10,5 @@ you can override the following values to alter the gif's properties:
 13 | FPS = 30                #Frames per second
 14 | duration = 2            #Duration in seconds
 ```
-
+---
 For images with more than 62500 pixels (e.g 250x250 image), JIT compilation is performed. Due to the time needed for compilation, when operating on smaller images, the program executes faster without JIT, that's why it's off then. You can see the mode in use when you start the program.
