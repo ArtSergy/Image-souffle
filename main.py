@@ -1,17 +1,26 @@
 from PIL import Image
+from numba import jit
+from math import ceil
 import numpy as np
+from numpy import random
 import os
-from random import randint
 import matplotlib.pyplot as plt
 import glob
+import time
 from time import sleep
 
+# Configuration:
+FPS = 30                #Frames per second
+duration = 2            #Duration in seconds
+total = FPS*duration
 
-def savetooutput(input):
+loading="\|/-"
+start_time = time.time()
+
+def savetooutput(input, outputindex):
     input = np.reshape(input, (resx, resy, 3))
     input = input.astype(np.uint8)
-    sleep(0.01)
-    Image.fromarray(input).save("/home/linux77/PycharmProjects/imagesort/output/output" + str(outputindex) + ".jpg")
+    Image.fromarray(input).save("/home/linux77/PycharmProjects/imagesort/output/output" + str(outputindex).zfill(6) + ".jpg")
 
 
 def drawdata(input):
@@ -19,6 +28,39 @@ def drawdata(input):
     input = input.astype(np.uint8)
     plt.imshow(input)
     plt.show()
+
+
+def randomize(data, ind):
+
+    position = ind*(pixc//(duration*FPS))
+
+    for i in range(pixc//(duration*FPS)):
+        randindex = random.randint(pixc-1)
+        tempr = data[0][position][0]
+        tempg = data[0][position][1]
+        tempb = data[0][position][2]
+        data[0][position] = data[0][randindex]
+        data[0][randindex][0] = tempr
+        data[0][randindex][1] = tempg
+        data[0][randindex][2] = tempb
+        position += 1
+
+@jit(nopython=True)
+def jit_randomize(data, ind):
+
+    position = ind * (pixc // (duration * FPS))
+
+    for i in range(pixc // (duration * FPS)):
+        randindex = random.randint(pixc - 1)
+        tempr = data[0][position][0]
+        tempg = data[0][position][1]
+        tempb = data[0][position][2]
+        data[0][position] = data[0][randindex]
+        data[0][randindex][0] = tempr
+        data[0][randindex][1] = tempg
+        data[0][randindex][2] = tempb
+        position += 1
+
 
 
 image = Image.open('input.jpg')
@@ -31,35 +73,36 @@ data = data.astype(np.uint32)
 resx = data.shape[0]
 resy = data.shape[1]
 pixc = resx*resy
+outputindex = 0
 startshape = data.shape
 starttype = data.dtype
-framescout = 40         #number of frames
-duration = 1            #duration
-outputindex = 0
 
-#data = np.insert(data,data.shape[2],255,axis=2)
-#data = np.insert(data,data.shape[2],0,axis=2)
 data = np.reshape(data, (1, pixc, 3))
 
-#for i in range(pixc):
-    #data[0][i][4] = i
-
-for j in range(pixc):
-    randindex = randint(j,pixc-1)
-    tempr = data[0][j][0]
-    tempg = data[0][j][1]
-    tempb = data[0][j][2]
-    data[0][j] = data[0][randindex]
-    data[0][randindex][0] = tempr
-    data[0][randindex][1] = tempg
-    data[0][randindex][2] = tempb
-
-    if (j%(pixc//framescout//duration)==0):
-        savetooutput(data)
+if(pixc<62500):
+    print("JIT mode: OFF")
+    for i in range(total):
+        randomize(data, i)
+        savetooutput(data, outputindex)
         outputindex += 1
+        print("Status: " + str(ceil((i + 1) / total * 100)) + "% " + loading[i % 4], end='\r')
+
+else:
+    print("JIT mode: ON")
+
+    for i in range(total):
+        randomize(data, i)
+        savetooutput(data, outputindex)
+        outputindex += 1
+        print("Status: " + str(ceil((i + 1) / total * 100)) + "% " + loading[i % 4], end='\r')
+
+
 
 frames = []
-imgs = sorted(glob.glob("/home/linux77/PycharmProjects/imagesort/output/*.jpg"), key=os.path.getmtime)
+
+
+sleep(0.05)
+imgs = sorted(glob.glob("/home/linux77/PycharmProjects/imagesort/output/*.jpg"), key=os.path.basename)
 for i in imgs:
     new_frame = Image.open(i)
     frames.append(new_frame)
@@ -68,6 +111,6 @@ for i in imgs:
 frames[0].save('/home/linux77/PycharmProjects/imagesort/output/output.gif', format='GIF',
                append_images=frames[1:],
                save_all=True,
-               duration=framescout//duration//2, loop=0)
+               duration=(1000//FPS), loop=0)
 
-outputgif = Image.open("/home/linux77/PycharmProjects/imagesort/output/output.gif").show()
+print("Finished in %s seconds" % (round(time.time() - start_time, 4)))
