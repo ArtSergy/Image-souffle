@@ -1,7 +1,7 @@
 # <img src="https://i.imgur.com/js2tatp.png" alt="drawing" width="75"/> Image-Soufflé
 
 
-![GitHub](https://img.shields.io/github/license/artsergy/image-souffle) ![GitHub repo size](https://img.shields.io/github/repo-size/artsergy/image-souffle) ![GitHub last commit](https://img.shields.io/github/last-commit/artsergy/image-souffle) [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+![GitHub](https://img.shields.io/github/license/artsergy/image-souffle) ![GitHub repo size](https://img.shields.io/github/repo-size/artsergy/image-souffle) ![GitHub last commit](https://img.shields.io/github/last-commit/artsergy/image-souffle)
 
 Very useful python script to randomize pixels position in any image. For now only .jpg supported. To use the program place the file named input.jpg in the main directory. All pictures and the final gif will be created in the output directory
 
@@ -20,3 +20,5 @@ you can override the following values to alter the gif's properties:
 For images with more than 62500 pixels (e.g 250x250 image), JIT compilation is performed. Due to the time needed for compilation, when operating on smaller images, the program executes faster without JIT, that's why it's off then. You can see the mode in use when you start the program.
 
 ![Performance plot](https://i.imgur.com/Dfmzo0P.png)
+
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
