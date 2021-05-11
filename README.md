@@ -1,7 +1,7 @@
 # <img src="https://i.imgur.com/js2tatp.png" alt="drawing" width="75"/> Image-Soufflé
 
 
-![GitHub](https://img.shields.io/github/license/artsergy/image-souffle) ![GitHub repo size](https://img.shields.io/github/repo-size/artsergy/image-souffle) ![GitHub last commit](https://img.shields.io/github/last-commit/artsergy/image-souffle)
+![GitHub](https://img.shields.io/github/license/artsergy/image-souffle) ![GitHub last commit](https://img.shields.io/github/last-commit/artsergy/image-souffle)
 
 Very useful python script to randomize pixels position in any image. For now only .jpg supported. To use the program place the file named input.jpg in the main directory. All pictures and the final gif will be created in the output directory
 
