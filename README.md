@@ -23,4 +23,4 @@ For images with more than 62500 pixels (e.g 250x250 image), JIT compilation is p
 
 
 ---
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](https://forthebadge.com)
+
