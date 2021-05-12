@@ -13,7 +13,7 @@ you can override the following values to alter the gif's properties:
 13 | FPS = 30                #Frames per second
 14 | duration = 2            #Duration in seconds
 ```
----
+
 # What's new
 
 ## JIT
