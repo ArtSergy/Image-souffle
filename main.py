@@ -20,7 +20,7 @@ start_time = time.time()
 def savetooutput(input, outputindex):
     input = np.reshape(input, (resx, resy, 3))
     input = input.astype(np.uint8)
-    Image.fromarray(input).save("/home/linux77/PycharmProjects/imagesort/output/output" + str(outputindex).zfill(6) + ".jpg")
+    Image.fromarray(input).save("output/output" + str(outputindex).zfill(6) + ".jpg")
 
 
 def drawdata(input):
@@ -102,13 +102,13 @@ frames = []
 
 
 sleep(0.05)
-imgs = sorted(glob.glob("/home/linux77/PycharmProjects/imagesort/output/*.jpg"), key=os.path.basename)
+imgs = sorted(glob.glob("output/*.jpg"), key=os.path.basename)
 for i in imgs:
     new_frame = Image.open(i)
     frames.append(new_frame)
 
 # Save into a GIF file that loops forever
-frames[0].save('/home/linux77/PycharmProjects/imagesort/output/output.gif', format='GIF',
+frames[0].save('output/output.gif', format='GIF',
                append_images=frames[1:],
                save_all=True,
                duration=(1000//FPS), loop=0)
